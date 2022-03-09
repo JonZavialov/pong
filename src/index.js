@@ -1,7 +1,7 @@
 function initPong() {
     const board = new Board()
-    const playerPaddle = new PlayerPaddle(true)
-    const aiPaddle = new AiPaddle(false)
+    const playerPaddle = new PlayerPaddle()
+    const aiPaddle = new AiPaddle()
 
     board.renderPaddle(playerPaddle)
     board.renderPaddle(aiPaddle)
