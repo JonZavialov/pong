@@ -1,9 +1,10 @@
 class Paddle {
-    constructor(x, board) {
+    constructor(x, board, moveCoeff) {
         this.width = 15
         this.height = 60
         this.x = x
         this.y = board.height / 2 - this.height / 2
+        this.moveCoeff = moveCoeff
     }
 
     renderIntoBoard(board) {
@@ -14,7 +15,7 @@ class Paddle {
         if (this.y === 0 && direction === 'up') return
         if (this.y === board.height - this.height && direction === 'down') return
 
-        if (direction === 'up') this.y -= 10
-        else if (direction === 'down') this.y += 10
+        if (direction === 'up') this.y -= this.moveCoeff
+        else if (direction === 'down') this.y += this.moveCoeff
     }
 }
