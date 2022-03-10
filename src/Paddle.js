@@ -16,6 +16,5 @@ class Paddle {
 
         if (direction === 'up') this.y -= 10
         else if (direction === 'down') this.y += 10
-        board.update()
     }
 }

@@ -2,11 +2,13 @@ function initPong() {
     const board = new Board()
     const playerPaddle = new PlayerPaddle(board)
     const aiPaddle = new AiPaddle(board)
+    const ball = new Ball(board)
 
     board.renderPaddle(playerPaddle)
     board.renderPaddle(aiPaddle)
-
+    board.renderBall(ball)
     startListeners(playerPaddle, board)
+    board.init()
 }
 
 function startListeners(playerPaddle, board) {

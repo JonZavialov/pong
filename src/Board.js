@@ -2,14 +2,20 @@ class Board {
     constructor() {
         this.canvas = $('#gameBoard')[0].getContext('2d');
         this.canvas.fillStyle = 'white';
-        this.paddles = []
         this.width = $('#gameBoard').width()
         this.height = $('#gameBoard').height()
+
+        this.paddles = []
     }
 
     renderPaddle(paddle) {
         if (!this.paddles.includes(paddle)) this.paddles.push(paddle)
         paddle.renderIntoBoard(this.canvas)
+    }
+
+    renderBall(ball) {
+        if (!this.ball) this.ball = ball
+        ball.renderIntoBoard(this.canvas)
     }
 
     clear() {
@@ -21,5 +27,13 @@ class Board {
     update() {
         this.clear()
         this.paddles.forEach(paddle => this.renderPaddle(paddle))
+        this.renderBall(this.ball)
+    }
+
+    init() {
+        this.loop = setInterval(() => {
+            this.ball.move()
+            this.update()
+        }, 10)
     }
 }
