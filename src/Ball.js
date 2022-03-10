@@ -1,18 +1,20 @@
 class Ball {
     constructor(board) {
         this.radius = 7
-        this.x = board.width / 2 - this.radius
-        this.y = board.height / 2 - this.radius
+        this.x = board.width / 2
+        this.y = board.height / 2
 
         this.height = board.height
         this.width = board.width
 
         this.generateInitialVeloctiy()
+        this.boardLoop = board.loop
+        this.boardScore = board.score
     }
 
     renderIntoBoard(board) {
         board.beginPath()
-        board.arc(this.x + this.radius, this.y + this.radius, this.radius, 0, 2 * Math.PI);
+        board.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
         board.fill();
     }
 
@@ -32,7 +34,18 @@ class Ball {
 
         // if it goes to the end of the sreen restart the game
         if (this.x < this.radius || this.x > this.width + this.radius) {
-            console.log('lost')
+            clearInterval(this.boardLoop)
+
+            const reloadURL = new URL(window.location.href)
+            if (this.x < this.radius) {
+                reloadURL.searchParams.set('aiScore', parseInt(this.boardScore[1]) + 1)
+                reloadURL.searchParams.set('playerScore', this.boardScore[0])
+            }
+            if (this.x > this.width + this.radius) {
+                reloadURL.searchParams.set('playerScore', parseInt(this.boardScore[0]) + 1)
+                reloadURL.searchParams.set('aiScore', this.boardScore[1])
+            }
+            window.location.href = reloadURL.href
         }
 
         this.x += this.xVelocity;
@@ -41,7 +54,7 @@ class Ball {
         paddles.forEach(paddle => paddle.checkForHit(this))
     }
 
-    isSameHeight(player) {
-        return this.y >= player.y && this.y <= player.y + player.height
+    isSameHeight(paddle) {
+        return this.y >= paddle.y && this.y <= paddle.y + paddle.height
     }
 }
