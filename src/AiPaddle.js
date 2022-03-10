@@ -1,5 +1,5 @@
 class AiPaddle extends Paddle {
-    constructor() {
-        super(200)
+    constructor(board) {
+        super(board.width - 15, board)
     }
 }

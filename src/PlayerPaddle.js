@@ -1,5 +1,5 @@
 class PlayerPaddle extends Paddle {
-    constructor() {
-        super(10)
+    constructor(board) {
+        super(0, board)
     }
 }
