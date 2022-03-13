@@ -8,7 +8,10 @@ class Board {
 
     this.paddles = [];
     const params = new URLSearchParams(window.location.search);
-    this.score = [params.get("playerScore") || 0, params.get("aiScore") || 0];
+    this.score = [
+      params.get("playerScore") || "0",
+      params.get("aiScore") || "0",
+    ];
     this.renderScore();
   }
 
