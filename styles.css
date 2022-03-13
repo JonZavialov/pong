@@ -4,4 +4,22 @@
 
 body {
   margin: 0;
+  font-family: blippo;
+  color: white;
+}
+
+@font-face {
+  font-family: "blippo";
+  src: url("/blippo.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+#playerScore {
+  position: absolute;
+}
+
+#aiScore {
+  transform: translate(209px, -284px);
+  position: absolute;
 }

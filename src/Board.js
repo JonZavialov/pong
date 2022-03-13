@@ -9,6 +9,16 @@ class Board {
     this.paddles = [];
     const params = new URLSearchParams(window.location.search);
     this.score = [params.get("playerScore") || 0, params.get("aiScore") || 0];
+    this.renderScore();
+  }
+
+  renderScore() {
+    $("#playerScore").text(this.score[0]);
+    $("#playerScore").css(
+      "transform",
+      `translate(${174 - (this.score[0].length - 1) * 18}px, -284px)`
+    );
+    $("#aiScore").text(this.score[1]);
   }
 
   renderPaddle(paddle) {
