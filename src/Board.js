@@ -7,21 +7,20 @@ class Board {
     this.height = $("#gameBoard").height();
 
     this.paddles = [];
-    const params = new URLSearchParams(window.location.search);
-    this.score = [
-      params.get("playerScore") || "0",
-      params.get("aiScore") || "0",
-    ];
+    this.score = {
+      player: 0,
+      ai: 0,
+    }
     this.renderScore();
   }
 
   renderScore() {
-    $("#playerScore").text(this.score[0]);
+    $("#playerScore").text(this.score.player);
     $("#playerScore").css(
       "transform",
-      `translate(${174 - (this.score[0].length - 1) * 18}px, -284px)`
+      `translate(${174 - (this.score.player.toString().length - 1) * 18}px, -284px)`
     );
-    $("#aiScore").text(this.score[1]);
+    $("#aiScore").text(this.score.ai);
   }
 
   renderPaddle(paddle) {
@@ -49,7 +48,7 @@ class Board {
   }
 
   init() {
-    this.loop = setInterval(() => {
+    setInterval(() => {
       this.ball.move(this.paddles);
       this.paddles.forEach((paddle) => {
         if (paddle.constructor.name === "AiPaddle")
